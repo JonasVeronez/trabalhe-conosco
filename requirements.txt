@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+asyncpg
+alembic
+python-dotenv
+loguru
+cpf-cnpj-validator
+pydantic-settings 
