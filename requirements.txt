@@ -6,4 +6,6 @@ alembic
 python-dotenv
 loguru
 cpf-cnpj-validator
-pydantic-settings 
+pydantic-settings
+pytest
+httpx

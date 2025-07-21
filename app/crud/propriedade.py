@@ -1,6 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from models.propriedade import Propriedade
+from models.cultura_safra import CulturaSafra
+
 from schemas.propriedade import PropriedadeCreate
 
 
@@ -22,10 +24,21 @@ async def buscar_propriedade_por_id(db: AsyncSession, propriedade_id: int):
     return result.scalar_one_or_none()
 
 
-async def deletar_propriedade(db: AsyncSession, propriedade_id: int) -> bool:
-    propriedade = await buscar_propriedade_por_id(db, propriedade_id)
-    if propriedade:
-        await db.delete(propriedade)
-        await db.commit()
-        return True
-    return False
+async def deletar_propriedade(db: AsyncSession, propriedade_id: int):
+
+    propriedade = await db.get(Propriedade, propriedade_id)
+    if not propriedade:
+        return False
+
+
+    culturas_result = await db.execute(
+        select(CulturaSafra).where(CulturaSafra.propriedade_id == propriedade_id)
+    )
+    culturas = culturas_result.scalars().all()
+
+    for cultura in culturas:
+        await db.delete(cultura)
+
+    await db.delete(propriedade)
+    await db.commit()
+    return True
