@@ -1,5 +1,4 @@
-
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -12,4 +11,9 @@ class Propriedade(Base):
     estado = Column(String, nullable=False)
     produtor_id = Column(Integer, ForeignKey("produtores.id"), nullable=False)
 
+    area_total = Column(Float, nullable=False)
+    area_agricultavel = Column(Float, nullable=False)
+    area_vegetacao = Column(Float, nullable=False)
+
     produtor = relationship("Produtor", back_populates="propriedades")
+    culturas = relationship("CulturaSafra", back_populates="propriedade")

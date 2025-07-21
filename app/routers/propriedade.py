@@ -2,13 +2,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db
-from schemas.propriedade import PropriedadeCreate, PropriedadeRead
+from schemas.propriedade import PropriedadeCreate, PropriedadeResponse
 from crud import propriedade as crud_propriedade
 from typing import List
 
 router = APIRouter(prefix="/propriedades", tags=["Propriedades"])
 
-@router.post("/", response_model=PropriedadeRead)
+@router.post("/", response_model=PropriedadeResponse)
 async def criar_propriedade_endpoint(
     propriedade: PropriedadeCreate,
     db: AsyncSession = Depends(get_db),
@@ -16,14 +16,14 @@ async def criar_propriedade_endpoint(
     return await crud_propriedade.criar_propriedade(db, propriedade)
 
 
-@router.get("/", response_model=List[PropriedadeRead])
+@router.get("/", response_model=List[PropriedadeResponse])
 async def listar_propriedades_endpoint(
     skip: int = 0, limit: int = 100, db: AsyncSession = Depends(get_db)
 ):
     return await crud_propriedade.listar_propriedades(db, skip=skip, limit=limit)
 
 
-@router.get("/{propriedade_id}", response_model=PropriedadeRead)
+@router.get("/{propriedade_id}", response_model=PropriedadeResponse)
 async def buscar_propriedade_endpoint(
     propriedade_id: int, db: AsyncSession = Depends(get_db)
 ):
