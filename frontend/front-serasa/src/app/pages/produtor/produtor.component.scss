@@ -1,0 +1,16 @@
+.produtor-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end; // para alinhar botões e campos na base
+
+  .form-field {
+    flex: 1 1 20%; // campo ocupa no mínimo 20% e pode crescer
+    min-width: 200px;
+  }
+
+  .submit-button {
+    flex: 0 0 auto; // botão não cresce
+    height: 36px; // alinhamento vertical com os campos
+  }
+}

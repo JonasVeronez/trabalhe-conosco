@@ -1,0 +1,68 @@
+<h2>Cadastro de Produtor</h2>
+<form [formGroup]="produtorForm" (ngSubmit)="createProdutor()" class="produtor-form">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Documento</mat-label>
+    <input matInput formControlName="documento" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Cidade</mat-label>
+    <input matInput formControlName="cidade" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Estado</mat-label>
+    <input matInput formControlName="estado" required />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="produtorForm.invalid" class="submit-button">
+    Criar Produtor
+  </button>
+</form>
+
+<h2>Lista de Produtores</h2>
+<table mat-table [dataSource]="produtores" class="mat-elevation-z8" style="width: 100%;">
+
+  <!-- Nome Column -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let produtor"> {{ produtor.nome }} </td>
+  </ng-container>
+
+  <!-- Documento Column -->
+  <ng-container matColumnDef="documento">
+    <th mat-header-cell *matHeaderCellDef> Documento </th>
+    <td mat-cell *matCellDef="let produtor"> {{ produtor.documento }} </td>
+  </ng-container>
+
+  <!-- Cidade Column -->
+  <ng-container matColumnDef="cidade">
+    <th mat-header-cell *matHeaderCellDef> Cidade </th>
+    <td mat-cell *matCellDef="let produtor"> {{ produtor.cidade }} </td>
+  </ng-container>
+
+  <!-- Estado Column -->
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let produtor"> {{ produtor.estado }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let produtor">
+      <button mat-icon-button color="warn" (click)="deleteProdutor(produtor.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

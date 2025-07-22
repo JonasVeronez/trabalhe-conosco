@@ -1,0 +1,102 @@
+<h2>Cadastro de Propriedade</h2>
+<form [formGroup]="propriedadeForm" (ngSubmit)="createPropriedade()">
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cidade</mat-label>
+    <input matInput formControlName="cidade" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Estado</mat-label>
+    <input matInput formControlName="estado" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Área Total</mat-label>
+    <input matInput type="number" formControlName="area_total" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Área Agricultável</mat-label>
+    <input matInput type="number" formControlName="area_agricultavel" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Área Vegetação</mat-label>
+    <input matInput type="number" formControlName="area_vegetacao" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Produtor</mat-label>
+    <mat-select formControlName="produtor_id" required>
+      <mat-option *ngFor="let produtor of produtores" [value]="produtor.id">
+        {{ produtor.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="propriedadeForm.invalid">Criar Propriedade</button>
+</form>
+
+<h2>Lista de Propriedades</h2>
+<table mat-table [dataSource]="propriedades" class="mat-elevation-z8" style="width: 100%;">
+
+  <!-- Nome Column -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.nome }} </td>
+  </ng-container>
+
+  <!-- Cidade Column -->
+  <ng-container matColumnDef="cidade">
+    <th mat-header-cell *matHeaderCellDef> Cidade </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.cidade }} </td>
+  </ng-container>
+
+  <!-- Estado Column -->
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.estado }} </td>
+  </ng-container>
+
+  <!-- Área Total Column -->
+  <ng-container matColumnDef="area_total">
+    <th mat-header-cell *matHeaderCellDef> Área Total </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.area_total }} </td>
+  </ng-container>
+
+  <!-- Área Agricultável Column -->
+  <ng-container matColumnDef="area_agricultavel">
+    <th mat-header-cell *matHeaderCellDef> Área Agricultável </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.area_agricultavel }} </td>
+  </ng-container>
+
+  <!-- Área Vegetação Column -->
+  <ng-container matColumnDef="area_vegetacao">
+    <th mat-header-cell *matHeaderCellDef> Área Vegetação </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ propriedade.area_vegetacao }} </td>
+  </ng-container>
+
+  <!-- Produtor Column -->
+  <ng-container matColumnDef="produtor">
+    <th mat-header-cell *matHeaderCellDef> Produtor </th>
+    <td mat-cell *matCellDef="let propriedade"> {{ getProdutorNome(propriedade.produtor_id) }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let propriedade">
+      <button mat-icon-button color="warn" (click)="deletePropriedade(propriedade.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

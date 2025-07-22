@@ -10,3 +10,44 @@ $my-theme: mat.define-light-theme((
 ));
 
 @include mat.all-component-themes($my-theme);
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Ajuste a largura do sidebar para o que você usa, ex: 250px */
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  top: 60px; /* altura do header */
+  left: 0;
+  background-color: #eee;
+  overflow-y: auto;
+}
+
+/* O header fixo */
+.header {
+  position: fixed;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #388e3c;
+  z-index: 1000;
+}
+
+/* O footer fixo */
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #388e3c;
+  z-index: 1000;
+}
+
+/* Conteúdo principal: abre espaço para sidebar + header + footer */
+.main-content {
+  margin-left: 250px; /* igual largura do sidebar */
+  padding-top: 60px;   /* altura do header */
+  padding-bottom: 60px; /* altura do footer */
+  min-height: calc(100vh - 120px);
+  box-sizing: border-box;
+}

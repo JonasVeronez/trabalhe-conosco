@@ -1,25 +1,24 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
+/* Container principal com flex para sidebar + conteúdo lado a lado */
 .main-container {
-  flex: 1;
   display: flex;
-  background-color: #f9f9f9; // fundo claro para o conteúdo
-  overflow: hidden;
+  height: calc(100vh - 128px); /* altura total da viewport menos header e footer (ajuste o valor conforme seu header/footer) */
+  overflow: hidden; /* evita scroll horizontal */
 }
 
+/* Sidebar com largura fixa */
 app-sidebar {
-  width: 240px;
-  background-color: #f5f5f5; // cinza claro
-  border-right: 1px solid #ddd;
-  overflow-y: auto;
+  width: 220px; /* largura fixa para sidebar */
+  flex-shrink: 0; /* não encolher */
+  height: 100%;
+  overflow-y: auto; /* scroll vertical se precisar */
+  border-right: 1px solid #ddd; /* opcional, para separar visualmente */
 }
 
+/* Conteúdo principal ocupa o restante */
 .content-area {
-  flex: 1;
-  padding: 24px;
-  overflow-y: auto;
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto; /* scroll vertical para o conteúdo */
+  padding: 16px;
+  background-color: #fafafa; /* cor de fundo opcional */
 }
