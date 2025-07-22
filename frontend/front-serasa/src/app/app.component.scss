@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  background-color: #f9f9f9; // fundo claro para o conteúdo
+  overflow: hidden;
+}
+
+app-sidebar {
+  width: 240px;
+  background-color: #f5f5f5; // cinza claro
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.content-area {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}

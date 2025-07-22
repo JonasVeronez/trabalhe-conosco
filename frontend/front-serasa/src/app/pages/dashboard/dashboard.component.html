@@ -1,0 +1,48 @@
+<h1>Dashboard</h1>
+
+<p><strong>Total de fazendas cadastradas:</strong> {{ dashboard?.total_fazendas }}</p>
+<p><strong>Total de hectares registrados:</strong> {{ dashboard?.total_hectares }}</p>
+
+<div class="dashboard-section">
+  <ul>
+    <li *ngFor="let item of dashboard?.propriedades_por_estado">
+      {{ item.estado }}: {{ item.quantidade }} ({{ item.percentual }}%)
+    </li>
+  </ul>
+</div>
+
+<div class="charts-row">
+  <div class="dashboard-section chart-wrapper">
+    <h3>Propriedades por estado</h3>
+    <canvas baseChart
+            [data]="{ labels: pieChartLabelsEstado, datasets: [{ data: pieChartDataEstado }] }"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+    </canvas>
+  </div>
+
+  <div class="dashboard-section chart-wrapper">
+    <h3>Culturas</h3>
+    <ul>
+      <li *ngFor="let cultura of dashboard?.culturas">
+        {{ cultura.nome }}: {{ cultura.quantidade }} ({{ cultura.percentual }}%)
+      </li>
+    </ul>
+    <canvas baseChart
+            [data]="{ labels: pieChartLabelsCultura, datasets: [{ data: pieChartDataCultura }] }"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+    </canvas>
+  </div>
+
+  <div class="dashboard-section chart-wrapper">
+    <h3>Uso do Solo</h3>
+    <p>Área Agricultável: {{ dashboard?.uso_solo.agricultavel }} ({{ dashboard?.uso_solo.percentual_agricultavel }}%)</p>
+    <p>Vegetação: {{ dashboard?.uso_solo.vegetacao }} ({{ dashboard?.uso_solo.percentual_vegetacao }}%)</p>
+    <canvas baseChart
+            [data]="{ labels: pieChartLabelsUsoSolo, datasets: [{ data: pieChartDataUsoSolo }] }"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+    </canvas>
+  </div>
+</div>
